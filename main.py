@@ -1,6 +1,14 @@
+'''
+Basic Currency Exchange Application based on ExchangeRate-Api
+
+# Todo: complete the currency.compare() function
+# Todo: implement the currency.compare() function
+'''
+
 import requests
 from API import API_KEY
 from API import CURR
+
 
 LINK = "https://v6.exchangerate-api.com/v6/"
 
@@ -15,6 +23,9 @@ class CurrencyExchange():
         # limiting the precision to 4 decimal places
         amount = round(amount * self.rates[to_currency], 4)
         return amount
+
+    def compare(self, first_currency, second_currency):
+        pass
 
 
 def exchange():
@@ -44,10 +55,40 @@ def exchange():
     print(f"{amount} {currency_code} = {currency.convert(exchange_code,amount)} {exchange_code}")
 
 
+def compare():
+    ''' Function to compare currencies based on USD'''
+    url = LINK + API_KEY + "/latest/USD"
+
+    currency = CurrencyExchange(url)
+
+    curr_1 = input("Enter currency code for first currency: ")
+    if curr_1 not in CURR:
+        print(
+            f"{curr_1} is currently not supported for exchange, converting to EUR...")
+        exchange_code = "EUR"
+
+    curr_2 = input("Enter currency code for second currency: ")
+    if curr_2 not in CURR:
+        print(
+            f"{curr_2} is currently not supported for exchange, converting to INR...")
+        exchange_code = "INR"
+
+
 def main():
     ''' Handles the greetings and initial displays'''
-    print('CURRENCY EXCHANGE APP'.center(51, '='), "\n")
-    exchange()
+    print('CURRENCY EXCHANGE APP'.center(51, '='), "\n\n")
+    print('MENU'.center(51, '-'), '\n')
+    print('1.     Exchange currency')
+    print('2.     Comapre Currencies')
+    print('Else.  Exit')
+    try:
+        choice = int(input('Enter :  '))
+    except ValueError:
+        choice = -1
+    if choice == 1:
+        exchange()
+    if choice == 2:
+        compare()
 
 
 if __name__ == '__main__':
