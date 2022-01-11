@@ -25,31 +25,39 @@ class CurrencyExchange():
         return amount
 
     def compare(self, first_currency, second_currency):
-        pass
+        if self.rates[first_currency] < self.rates[second_currency]:
+            print(f"\n{first_currency} is more valuable than {second_currency}")
+            print(f"1 {first_currency} = {self.rates[second_currency]/self.rates[first_currency]} {second_currency}\n")
+        elif self.rates[first_currency] > self.rates[second_currency]:
+            print(f"\n{second_currency} is more valuable than {first_currency}")
+            print(f"1 {second_currency} = {self.rates[first_currency]/self.rates[second_currency]} {first_currency}\n")
+        else:
+            print("\nBoth are of same value.\n")
+
 
 
 def exchange():
     ''' Function for exchange of the currencies'''
-    currency_code = input("Enter the currency code: ")
+    currency_code = input("\nEnter the currency code: ")
     if currency_code not in CURR:
-        print(f"{currency_code} is not supported, changing the base currency to USD...")
+        print(f"\n{currency_code} is not supported, changing the base currency to USD...")
         currency_code = "USD"
 
     url = LINK + API_KEY + "/latest/" + currency_code
 
     currency = CurrencyExchange(url)
 
-    exchange_code = input("Enter the exchange currency code: ")
+    exchange_code = input("\nEnter the exchange currency code: ")
     if exchange_code not in CURR:
         print(
-            f"{exchange_code} is currently not supported for exchange, converting to EUR...")
+            f"\n{exchange_code} is currently not supported for exchange, converting to EUR...")
         exchange_code = "EUR"
 
-    amount = input("Enter the amount of currency to convert: ")
+    amount = input("\nEnter the amount of currency to convert: ")
     try:
         amount = float(amount)
     except ValueError:
-        print("The input amount you entered is incorrect, input amount set to 1...")
+        print("\nThe input amount you entered is incorrect, input amount set to 1...")
         amount = 1
 
     print(f"{amount} {currency_code} = {currency.convert(exchange_code,amount)} {exchange_code}")
@@ -61,18 +69,19 @@ def compare():
 
     currency = CurrencyExchange(url)
 
-    curr_1 = input("Enter currency code for first currency: ")
+    curr_1 = input("\nEnter currency code for first currency: ")
     if curr_1 not in CURR:
         print(
-            f"{curr_1} is currently not supported for exchange, converting to EUR...")
+            f"\n{curr_1} is currently not supported for exchange, converting to EUR...")
         exchange_code = "EUR"
 
-    curr_2 = input("Enter currency code for second currency: ")
+    curr_2 = input("\nEnter currency code for second currency: ")
     if curr_2 not in CURR:
         print(
-            f"{curr_2} is currently not supported for exchange, converting to INR...")
+            f"\n{curr_2} is currently not supported for exchange, converting to INR...")
         exchange_code = "INR"
 
+    currency.compare(curr_1, curr_2)
 
 def main():
     ''' Handles the greetings and initial displays'''
