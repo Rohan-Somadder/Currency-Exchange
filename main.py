@@ -73,13 +73,13 @@ def compare():
     if curr_1 not in CURR:
         print(
             f"\n{curr_1} is currently not supported for exchange, converting to EUR...")
-        exchange_code = "EUR"
+        curr_1 = "EUR"
 
     curr_2 = input("\nEnter currency code for second currency: ")
     if curr_2 not in CURR:
         print(
             f"\n{curr_2} is currently not supported for exchange, converting to INR...")
-        exchange_code = "INR"
+        curr_2 = "INR"
 
     currency.compare(curr_1, curr_2)
 
