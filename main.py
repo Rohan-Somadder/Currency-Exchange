@@ -37,7 +37,7 @@ class CurrencyExchange():
 
 def exchange():
     ''' Function for exchange of the currencies'''
-    currency_code = input("\nEnter the currency code: ")
+    currency_code = input("\nEnter the currency code: ").upper()
     if currency_code not in CURR:
         print(
             f"\n{currency_code} is not supported, changing the base currency to USD...")
@@ -47,7 +47,7 @@ def exchange():
 
     currency = CurrencyExchange(url)
 
-    exchange_code = input("\nEnter the exchange currency code: ")
+    exchange_code = input("\nEnter the exchange currency code: ").upper()
     if exchange_code not in CURR:
         print(
             f"\n{exchange_code} is currently not supported for exchange, converting to EUR...")
@@ -69,13 +69,13 @@ def compare():
 
     currency = CurrencyExchange(url)
 
-    curr_1 = input("\nEnter currency code for first currency: ")
+    curr_1 = input("\nEnter currency code for first currency: ").upper()
     if curr_1 not in CURR:
         print(
             f"\n{curr_1} is currently not supported for exchange, converting to EUR...")
         curr_1 = "EUR"
 
-    curr_2 = input("\nEnter currency code for second currency: ")
+    curr_2 = input("\nEnter currency code for second currency: ").upper()
     if curr_2 not in CURR:
         print(
             f"\n{curr_2} is currently not supported for exchange, converting to INR...")
